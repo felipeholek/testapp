@@ -20,14 +20,14 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-  # Declaração não segura mas facilita esse tipo de teste (por dispensar declarações de variáveis de ambiente):
   username: <%= ENV["TESTAPP_DATABASE_USERNAME"] %>
   password: <%= ENV["TESTAPP_DATABASE_PASSWORD"] %>
 
 development:
   <<: *default
   database: testapp_development
+  username: <%= ENV["TESTAPP_DATABASE_USERNAME"] %>
+  password: <%= ENV["TESTAPP_DATABASE_PASSWORD"] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -55,15 +55,16 @@ development:
   #   log, notice, warning, error, fatal, and panic
   # Defaults to warning.
   #min_messages: notice
-  username: test
-  password: 123
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: testapp_test
+  database: testapp_development
+  host: ''
+  username: <%= ENV["TESTAPP_DATABASE_USERNAME"] %>
+  password: <%= ENV["TESTAPP_DATABASE_PASSWORD"] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,7 +84,7 @@ test:
 #
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
-#
+
 production:
   <<: *default
   database: testapp_production

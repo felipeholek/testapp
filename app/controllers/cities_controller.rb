@@ -7,6 +7,15 @@ class CitiesController < ApplicationController
     @query = params[:query]
     @selected_state_id = params[:state_id]
     @cities = retrieve_cities(@query, @selected_state_id)
+
+    respond_to do |format|
+      format.json do
+        render :json => {cities: @cities}
+      end
+      format.html do
+        render 'cities/query'
+      end
+    end
   end
 
   private

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= form_tag(query_path, {method: "get", class: 'row g-3'}) do %>
+<%= form_tag(query_cities_path, {method: "get", class: 'row g-3'}) do %>
   <div class="col-md-8">
     <%= label_tag :query, "City:", class: 'form-label' %>
     <%= text_field_tag :query, @query, placeholder: 'Query', class: 'form-control', required: true %>
@@ -12,7 +12,7 @@
   <div class="col-12">
     <%= submit_tag "Apply", class: 'btn btn-primary' %>
     <% if @query != nil %>
-      <%= link_to query_path do %>
+      <%= link_to query_cities_path do %>
         <%= button_tag 'Clear filter', type: 'button', class: 'btn btn-secondary' %>
       <% end %>
     <% end %>
