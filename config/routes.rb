@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root :to => redirect('/cities/query')
+  root to: redirect('/cities/query')
 
   resources :cities, only: %i[query] do
     collection do

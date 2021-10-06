@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CitiesController < ApplicationController
-
   # GET / (root)
   def query
     @query = params[:query]
@@ -10,7 +9,7 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render :json => {cities: @cities}
+        render json: { cities: @cities }
       end
       format.html do
         render 'cities/query'
@@ -25,10 +24,10 @@ class CitiesController < ApplicationController
     if query.nil? && federated_state_id.nil?
       City.all
     elsif !query.blank? && !federated_state_id.blank?
-      City.includes(:federated_state).where('name ILIKE ? AND federated_state_id = ?', "%#{@query}%", @selected_state_id.to_s)
+      City.includes(:federated_state).where('name ILIKE ? AND federated_state_id = ?', "%#{@query}%",
+                                            @selected_state_id.to_s)
     else
       []
     end
   end
-
 end
